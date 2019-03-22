@@ -19,7 +19,7 @@ class PostItem extends Component {
             </div>
             <nav className="level is-mobile">
               <div className="level-left">
-                <span className="icon is-small has-text-info">
+                <span className="icon has-text-info">
                   <i className="fas fa-reply" aria-hidden="true" />
                 </span>
                 <span className="icon has-text-success">
