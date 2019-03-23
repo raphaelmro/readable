@@ -1,13 +1,9 @@
 import React from "react";
 import PostItem from "./PostItem";
 
-const postsPanelStyle = {
-  padding: "30px"
-};
-
 const PostsPanel = () => {
   return (
-    <div className="container is-fluid" style={postsPanelStyle}>
+    <div className="container is-fluid">
       <PostItem />
       <PostItem />
       <PostItem />
