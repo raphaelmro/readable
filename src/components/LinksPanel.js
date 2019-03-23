@@ -6,7 +6,7 @@ const LinksPanel = () => {
       <nav className="panel">
         <p className="panel-heading">Categories</p>
         <a className="panel-block">
-          <span className=" panel-block panel-icon">
+          <span className="panel-icon">
             <i className="fas fa-hashtag" aria-hidden="true" />
           </span>
           React
