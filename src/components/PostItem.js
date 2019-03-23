@@ -19,18 +19,26 @@ class PostItem extends Component {
             </div>
             <nav className="level is-mobile">
               <div className="level-left">
-                <span className="icon has-text-info">
-                  <i className="fas fa-reply" aria-hidden="true" />
-                </span>
-                <span className="icon has-text-success">
-                  <i className="fas fa-caret-up" />
-                  <small>2</small>
-                </span>
-                <span className="icon has-text-danger">
-                  <i className="fas fa-caret-down" />
-                  <small>1</small>
-                </span>
-                <small>11:09 PM - 1 Jan 2016</small>
+                <div className="level-item">
+                  <span className="icon has-text-info">
+                    <i className="fas fa-reply" aria-hidden="true" />
+                  </span>
+                </div>
+                <div className="level-item">
+                  <span className="icon has-text-success">
+                    <i className="fas fa-caret-up" />
+                    <small>2</small>
+                  </span>
+                </div>
+                <div className="level-item">
+                  <span className="icon has-text-danger">
+                    <i className="fas fa-caret-down" />
+                    <small>1</small>
+                  </span>
+                </div>
+                <div className="level-item">
+                  <small>11:09 PM - 1 Jan 2016</small>
+                </div>
               </div>
             </nav>
           </div>
