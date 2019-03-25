@@ -1,14 +1,33 @@
-import React from "react";
-import PostItem from "./PostItem";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchPosts } from "../actions/posts";
 
-const PostsPanel = () => {
-  return (
-    <div className="container is-fluid">
-      <PostItem />
-      <PostItem />
-      <PostItem />
-    </div>
-  );
+class PostsPanel extends Component {
+
+    componentDidMount() {
+        this.props.fetchPosts();
+    }
+
+    renderList() {
+    }
+
+    render() {
+        console.log(this.props.posts)
+    return (
+      <div>
+        <div className="container is-fluid">
+
+        </div>
+      </div>
+    );
+  }
+}
+
+function mapStateToProps (state)  {
+  return { posts: state.posts };
 };
 
-export default PostsPanel;
+export default connect(
+  mapStateToProps,
+  { fetchPosts }
+)(PostsPanel);

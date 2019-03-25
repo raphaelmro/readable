@@ -2,7 +2,7 @@ import React from "react";
 
 const containerHeaderStyle = {
   'float': 'left',
-  'padding-left': '4%'
+  'paddingLeft': '4%'
 }
 
 const Header = () => {
