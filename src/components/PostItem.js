@@ -1,51 +1,53 @@
-import React, { Component } from "react";
+import React from "react";
+import moment from "moment";
 
-class PostItem extends Component {
-  render() {
-    return (
-      <div className="box">
-        <article className="media">
-          <div className="media-content">
-            <div className="content">
-              <p>
-                <strong>John Smith</strong>
-                <br />
-                <small>@johnsmith</small>
-                <br />
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                efficitur sit amet massa fringilla egestas. Nullam condimentum
-                luctus turpis.
-              </p>
-            </div>
-            <nav className="level is-mobile">
-              <div className="level-left">
-                <div className="level-item">
-                  <span className="icon has-text-info">
-                    <i className="fas fa-reply" aria-hidden="true" />
-                  </span>
-                </div>
-                <div className="level-item">
-                  <span className="icon has-text-success">
-                    <i className="fas fa-caret-up" />
-                    <small>2</small>
-                  </span>
-                </div>
-                <div className="level-item">
-                  <span className="icon has-text-danger">
-                    <i className="fas fa-caret-down" />
-                    <small>1</small>
-                  </span>
-                </div>
-                <div className="level-item">
-                  <small>11:09 PM - 1 Jan 2016</small>
-                </div>
-              </div>
-            </nav>
+const PostItem = props => {
+  const { timestamp, title, author, body, commentCount } = props;
+
+  return (
+    <div className="box">
+      <article className="media">
+        <div className="media-content">
+          <div className="content">
+            <p>
+              <strong>{props.title}</strong>
+              <br />
+              <small>@{props.author}</small>
+              <br />
+              {props.body}
+            </p>
           </div>
-        </article>
-      </div>
-    );
-  }
-}
+          <nav className="level is-mobile">
+            <div className="level-left">
+              <div className="level-item">
+                <span className="icon has-text-info">
+                  <i className="fas fa-reply" aria-hidden="true" />
+                  <small>
+                    {props.commentCount !== 0 ? props.commentCount : ""}
+                  </small>
+                </span>
+              </div>
+              <div className="level-item">
+                <span className="icon has-text-success">
+                  <i className="fas fa-caret-up" />
+                  <small>2</small>
+                </span>
+              </div>
+              <div className="level-item">
+                <span className="icon has-text-danger">
+                  <i className="fas fa-caret-down" />
+                  <small>1</small>
+                </span>
+              </div>
+              <div className="level-item">
+                <small>{moment(timestamp).format("lll")}</small>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </article>
+    </div>
+  );
+};
 
 export default PostItem;

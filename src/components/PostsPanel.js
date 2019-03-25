@@ -1,31 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions/posts";
+import PostItem from "./PostItem";
 
 class PostsPanel extends Component {
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
 
-    componentDidMount() {
-        this.props.fetchPosts();
-    }
+  renderList() {
+    return this.props.posts.map(post => {
+      return (
+        <PostItem
+          key={post.id}
+          title={post.title}
+          author={post.author}
+          body={post.body}
+          commentCount={post.commentCount}
+          timestamp={post.timestamp}
+        />
+      );
+    });
+  }
 
-    renderList() {
-    }
-
-    render() {
-        console.log(this.props.posts)
+  render() {
+    console.log(this.props.posts);
     return (
       <div>
-        <div className="container is-fluid">
-
-        </div>
+        <div className="container is-fluid">{this.renderList()}</div>
       </div>
     );
   }
 }
 
-function mapStateToProps (state)  {
+function mapStateToProps(state) {
   return { posts: state.posts };
-};
+}
 
 export default connect(
   mapStateToProps,
