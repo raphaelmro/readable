@@ -10,11 +10,11 @@ const PostItem = props => {
         <div className="media-content">
           <div className="content">
             <p>
-              <strong>{props.title}</strong>
+              <strong>{title}</strong>
               <br />
-              <small>@{props.author}</small>
+              <small>@{author}</small>
               <br />
-              {props.body}
+              {body}
             </p>
           </div>
           <nav className="level is-mobile">
@@ -23,7 +23,7 @@ const PostItem = props => {
                 <span className="icon has-text-info">
                   <i className="fas fa-reply" aria-hidden="true" />
                   <small>
-                    {props.commentCount !== 0 ? props.commentCount : ""}
+                    {commentCount !== 0 ? commentCount : ""}
                   </small>
                 </span>
               </div>
