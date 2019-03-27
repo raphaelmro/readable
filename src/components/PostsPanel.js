@@ -24,7 +24,6 @@ class PostsPanel extends Component {
   }
 
   render() {
-    console.log(this.props.posts);
     return (
       <div>
         <div className="container is-fluid">{this.renderList()}</div>

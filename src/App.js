@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Header from "./components/Header";
 import PostsPanel from "./components/PostsPanel";
-import LinksPanel from "./components/LinksPanel";
+import CategoriesPanel from "./components/CategoriesPanel";
 import LoadingBar from "react-redux-loading-bar";
 
 const postsPanelStyle = {
@@ -9,7 +9,8 @@ const postsPanelStyle = {
 };
 
 class App extends Component {
-  render() {
+
+    render() {
     return (
       <Fragment>
         <LoadingBar />
@@ -19,7 +20,7 @@ class App extends Component {
             <PostsPanel />
           </div>
           <div className="column">
-            <LinksPanel />
+            <CategoriesPanel />
           </div>
         </div>
       </Fragment>
