@@ -5,7 +5,7 @@ import { fetchCategories } from "../actions/categories";
 
 class CategoriesPanel extends Component {
   componentDidMount() {
-    this.props.fetchCategories();
+    /*this.props.fetchCategories();*/
   }
 
   renderList() {
