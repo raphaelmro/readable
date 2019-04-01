@@ -2,20 +2,23 @@ import React, { Component } from "react";
 import CategoriesItem from "./CategoriesItem";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions/categories";
+import PostItem from "./PostItem";
 
 class CategoriesPanel extends Component {
   componentDidMount() {
-    /*this.props.fetchCategories();*/
+    this.props.fetchCategories();
   }
 
   renderList() {
-    return this.props.categories.map(category => {
-      return <CategoriesItem name={category.name} path={category.path} />;
-    });
+    if (this.props.categories.categories !== undefined) {
+      return this.props.categories.categories.map(category => {
+        return <CategoriesItem name={category.name} path={category.path} />;
+      });
+    }
   }
 
   render() {
-    console.log(this.props.categories);
+    console.log(this.props.categories.categories);
     return (
       <div className="container is-fluid">
         <nav className="panel">
