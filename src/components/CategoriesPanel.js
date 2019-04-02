@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import CategoriesItem from "./CategoriesItem";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions/categories";
-import PostItem from "./PostItem";
 
 class CategoriesPanel extends Component {
   componentDidMount() {
@@ -18,7 +17,6 @@ class CategoriesPanel extends Component {
   }
 
   render() {
-    console.log(this.props.categories.categories);
     return (
       <div className="container is-fluid">
         <nav className="panel">
