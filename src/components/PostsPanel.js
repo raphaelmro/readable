@@ -18,6 +18,7 @@ class PostsPanel extends Component {
           body={post.body}
           commentCount={post.commentCount}
           timestamp={post.timestamp}
+          voteScore={post.voteScore}
         />
       );
     });
