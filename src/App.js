@@ -10,7 +10,7 @@ const postsPanelStyle = {
 
 class App extends Component {
 
-    render() {
+  render() {
     return (
       <Fragment>
         <LoadingBar />
