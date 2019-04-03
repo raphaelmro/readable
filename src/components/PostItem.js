@@ -2,19 +2,34 @@ import React from "react";
 import moment from "moment";
 
 const postItemStyle = {
-  display: 'flex',
+  display: "flex",
+  flexDirection: "column"
 };
 
 const upIconStyle = {
-{
-  display: 'flex';
-  flexDirection: 'column';
-  flexWrap: 'nowrap';
-  justifyContent: 'flex-start';
-  alignItems: 'center';
-  alignContent: 'flex-start';
-}
-}
+  display: "flex",
+  flexWrap: "nowrap",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  alignContent: "flex-start"
+};
+
+const voteScoreStyle = {
+  display: "flex",
+  flexWrap: "nowrap",
+  justifyContent: "center",
+  alignItems: "center",
+  alignContent: "center"
+};
+
+const downIconStyle = {
+  display: "flex",
+  flexDirection: "column",
+  flexWrap: "nowrap",
+  justifyContent: "flex-end",
+  alignItems: "center",
+  alignContent: "flex-end"
+};
 
 const PostItem = props => {
   const { timestamp, title, author, body, commentCount, voteScore } = props;
@@ -22,22 +37,27 @@ const PostItem = props => {
   return (
     <div className="box">
       <div className="columns">
-        <div className="column is-1 vote-box" style={postItemStyle}>
-          <nav className="level is-mobile" >
-            <div className="level-item">
+        <div className="column is-1 vote-box">
+          <div
+            className="columns is-desktop is-vcentered"
+            style={postItemStyle}
+          >
+            <div className="column" style={upIconStyle}>
               <span className="icon">
                 <i className="fas fa-caret-up" />
               </span>
             </div>
-            <div className='level-item'>
+            <div className="column" style={voteScoreStyle} style={{color: voteScore > 0 ? 'green': 'red'}}>
               {voteScore}
             </div>
-            <div className="level-item">
+            <div className="column" style={downIconStyle}>
               <span className="icon">
                 <i className="fas fa-caret-down" />
               </span>
             </div>
-          </nav>
+            {/*
+             */}
+          </div>
         </div>
         <div className="column">
           <article className="media">
