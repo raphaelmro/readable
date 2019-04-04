@@ -47,7 +47,11 @@ const PostItem = props => {
                 <i className="fas fa-caret-up" />
               </span>
             </div>
-            <div className="column" style={voteScoreStyle} style={{color: voteScore > 0 ? 'green': 'red'}}>
+            <div
+              className="column"
+              style={voteScoreStyle}
+              style={{ color: voteScore > 0 ? "green" : "red" }}
+            >
               {voteScore}
             </div>
             <div className="column" style={downIconStyle}>
@@ -55,8 +59,6 @@ const PostItem = props => {
                 <i className="fas fa-caret-down" />
               </span>
             </div>
-            {/*
-             */}
           </div>
         </div>
         <div className="column">
@@ -79,18 +81,6 @@ const PostItem = props => {
                       <small>{commentCount !== 0 ? commentCount : ""}</small>
                     </span>
                   </div>
-                  {/*<div className="level-item">
-                    <span className="icon has-text-success">
-                      <i className="fas fa-caret-up" />
-                      <small>2</small>
-                    </span>
-                  </div>
-                  <div className="level-item">
-                    <span className="icon has-text-danger">
-                      <i className="fas fa-caret-down" />
-                      <small>1</small>
-                    </span>
-                  </div>*/}
                   <div className="level-item">
                     <small>{moment(timestamp).format("lll")}</small>
                   </div>
