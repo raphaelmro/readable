@@ -12,6 +12,7 @@ class PostsPanel extends Component {
     return this.props.posts.map(post => {
       return (
         <PostItem
+          id={post.id}
           key={post.id}
           title={post.title}
           author={post.author}
