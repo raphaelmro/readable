@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from 'react';
 import moment from "moment";
 
 const postItemStyle = {
@@ -31,67 +31,75 @@ const downIconStyle = {
   alignContent: "flex-end"
 };
 
-const PostItem = props => {
-  const { timestamp, title, author, body, commentCount, voteScore } = props;
+class PostItem extends Component {
+  render() {
 
-  return (
-    <div className="box">
-      <div className="columns">
-        <div className="column is-1 vote-box">
-          <div
-            className="columns is-desktop is-vcentered"
-            style={postItemStyle}
-          >
-            <div className="column" style={upIconStyle}>
-              <span className="icon">
+    const upVote = () => {
+      alert('UpVoted')
+    }
+    const downVote = () => {
+      alert('DownVoted')
+    }
+    const { timestamp, title, author, body, commentCount, voteScore } = this.props;
+    return (
+        <div className="box">
+          <div className="columns">
+            <div className="column is-1 vote-box">
+              <div
+                  className="columns is-desktop is-vcentered"
+                  style={postItemStyle}
+              >
+                <div className="column" style={upIconStyle}>
+              <span className="icon" onClick={upVote}>
                 <i className="fas fa-caret-up" />
               </span>
-            </div>
-            <div
-              className="column"
-              style={voteScoreStyle}
-              style={{ color: voteScore > 0 ? "green" : "red" }}
-            >
-              {voteScore}
-            </div>
-            <div className="column" style={downIconStyle}>
-              <span className="icon">
-                <i className="fas fa-caret-down" />
+                </div>
+                <div
+                    className="column"
+                    style={voteScoreStyle}
+                    style={{ color: voteScore > 0 ? "green" : "red" }}
+                >
+                  {voteScore}
+                </div>
+                <div className="column" style={downIconStyle}>
+              <span className="icon" onClick={downVote}>
+                <i className="fas fa-caret-down"/>
               </span>
-            </div>
-          </div>
-        </div>
-        <div className="column">
-          <article className="media">
-            <div className="media-content">
-              <div className="content">
-                <p>
-                  <strong>{title}</strong>
-                  <br />
-                  <small>@{author}</small>
-                  <br />
-                  {body}
-                </p>
+                </div>
               </div>
-              <nav className="level is-mobile">
-                <div className="level-left">
-                  <div className="level-item">
+            </div>
+            <div className="column">
+              <article className="media">
+                <div className="media-content">
+                  <div className="content">
+                    <p>
+                      <strong>{title}</strong>
+                      <br />
+                      <small>@{author}</small>
+                      <br />
+                      {body}
+                    </p>
+                  </div>
+                  <nav className="level is-mobile">
+                    <div className="level-left">
+                      <div className="level-item">
                     <span className="icon has-text-info">
                       <i className="fas fa-reply" aria-hidden="true" />
                       <small>{commentCount !== 0 ? commentCount : ""}</small>
                     </span>
-                  </div>
-                  <div className="level-item">
-                    <small>{moment(timestamp).format("lll")}</small>
-                  </div>
+                      </div>
+                      <div className="level-item">
+                        <small>{moment(timestamp).format("lll")}</small>
+                      </div>
+                    </div>
+                  </nav>
                 </div>
-              </nav>
+              </article>
             </div>
-          </article>
+          </div>
         </div>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default PostItem;
