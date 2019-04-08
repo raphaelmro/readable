@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import moment from "moment";
+import { votePost } from "../actions/posts";
 
 const postItemStyle = {
   display: "flex",
@@ -14,13 +16,13 @@ const upIconStyle = {
   alignContent: "flex-start"
 };
 
-const voteScoreStyle = {
+/*const voteScoreStyle = {
   display: "flex",
   flexWrap: "nowrap",
   justifyContent: "center",
   alignItems: "center",
   alignContent: "center"
-};
+};*/
 
 const downIconStyle = {
   display: "flex",
@@ -32,25 +34,8 @@ const downIconStyle = {
 };
 
 class PostItem extends Component {
-  upVote = (e, id) => {
-    e.preventDefault();
-    alert(`Upvote! My id is ${id}`);
-  };
-  downVote = (e, id) => {
-    e.preventDefault();
-    alert(`Downvote! My id is ${id}`);
-  };
-
   render() {
-    const {
-      id,
-      timestamp,
-      title,
-      author,
-      body,
-      commentCount,
-      voteScore
-    } = this.props;
+    const { post, votePost } = this.props;
 
     return (
       <div className="box">
@@ -61,21 +46,24 @@ class PostItem extends Component {
               style={postItemStyle}
             >
               <div className="column" style={upIconStyle}>
-                <span className="icon" onClick={e => this.upVote(e, id)}>
+                <span
+                  className="icon"
+                  onClick={() => votePost(post.id, "upVote")}
+                >
                   <i className="fas fa-caret-up" />
                 </span>
               </div>
               <div
                 className="column"
-                style={[
-                  voteScoreStyle,
-                  { color: voteScore > 0 ? "green" : "red" }
-                ]}
+                style={{ color: post.voteScore > 0 ? "green" : "red" }}
               >
-                {voteScore}
+                {post.voteScore}
               </div>
               <div className="column" style={downIconStyle}>
-                <span className="icon" onClick={e => this.downVote(e, id)}>
+                <span
+                  className="icon"
+                  onClick={() => votePost(post.id, "downVote")}
+                >
                   <i className="fas fa-caret-down" />
                 </span>
               </div>
@@ -86,11 +74,11 @@ class PostItem extends Component {
               <div className="media-content">
                 <div className="content">
                   <p>
-                    <strong>{title}</strong>
+                    <strong>{post.title}</strong>
                     <br />
-                    <small>@{author}</small>
+                    <small>@{post.author}</small>
                     <br />
-                    {body}
+                    {post.body}
                   </p>
                 </div>
                 <nav className="level is-mobile">
@@ -98,11 +86,13 @@ class PostItem extends Component {
                     <div className="level-item">
                       <span className="icon has-text-info">
                         <i className="fas fa-reply" aria-hidden="true" />
-                        <small>{commentCount !== 0 ? commentCount : ""}</small>
+                        <small>
+                          {post.commentCount !== 0 ? post.commentCount : ""}
+                        </small>
                       </span>
                     </div>
                     <div className="level-item">
-                      <small>{moment(timestamp).format("lll")}</small>
+                      <small>{moment(post.timestamp).format("lll")}</small>
                     </div>
                   </div>
                 </nav>
@@ -115,4 +105,12 @@ class PostItem extends Component {
   }
 }
 
-export default PostItem;
+function mapStateToProps(state) {
+  return {
+    posts: state.posts
+  };
+}
+export default connect(
+  mapStateToProps,
+  { votePost }
+)(PostItem);

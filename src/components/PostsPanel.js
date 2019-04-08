@@ -9,23 +9,20 @@ class PostsPanel extends Component {
   }
 
   renderList() {
-    return this.props.posts.map(post => {
-      return (
-        <PostItem
-          id={post.id}
-          key={post.id}
-          title={post.title}
-          author={post.author}
-          body={post.body}
-          commentCount={post.commentCount}
-          timestamp={post.timestamp}
-          voteScore={post.voteScore}
-        />
-      );
-    });
+    if (this.props.posts.posts.length !== undefined) {
+      return this.props.posts.posts.map(post => {
+        return (
+          <PostItem
+            key={post.id}
+            post={post}
+          />
+        );
+      });
+    }
   }
 
   render() {
+    console.log(this.props.posts.posts)
     return (
       <div>
         <div className="container is-fluid">{this.renderList()}</div>
