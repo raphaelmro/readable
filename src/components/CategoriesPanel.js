@@ -11,7 +11,11 @@ class CategoriesPanel extends Component {
   renderList() {
     if (this.props.categories.categories !== undefined) {
       return this.props.categories.categories.map(category => {
-        return <CategoriesItem name={category.name} path={category.path} />;
+        return <CategoriesItem
+          key={category.name}
+          name={category.name}
+          path={category.path}
+        />;
       });
     }
   }
