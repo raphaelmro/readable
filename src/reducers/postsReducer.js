@@ -1,15 +1,19 @@
+import { types } from '../actions/posts'
+
 const INITIAL_DATA_STATE = {
-  posts: {}
+  posts: {},
+  fetching: false,
+  error: ''
 };
 
 export default (state = INITIAL_DATA_STATE, action) => {
   switch (action.type) {
-    case "FETCH_POSTS":
+    case types.LOAD_POSTS_REQUEST:
       return {
         ...state,
-        posts: action.payload
+        fetching: action.payload
       };
-    case "VOTE_POST":
+    case types.LOAD_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.payload

@@ -9,25 +9,23 @@ class CategoriesPanel extends Component {
   }
 
   renderList() {
-    if (this.props.categories.categories !== undefined) {
-      return this.props.categories.categories.map(category => {
-        return <CategoriesItem
-          key={category.name}
-          name={category.name}
-          path={category.path}
-        />;
-      });
-    }
+    const { categories } = this.props.categories;
+    return categories && categories.map((category, index) =>
+        <CategoriesItem
+            key={`${category.name}-${index}`}
+            name={category.name}
+            path={category.path} />
+    )
   }
 
   render() {
     return (
-      <div className="container is-fluid">
-        <nav className="panel">
-          <p className="panel-heading">Categories</p>
-          {this.renderList()}
-        </nav>
-      </div>
+        <div className="container is-fluid">
+          <nav className="panel">
+            <p className="panel-heading">Categories</p>
+            {this.renderList()}
+          </nav>
+        </div>
     );
   }
 }
@@ -37,6 +35,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(
-  mapStateToProps,
-  { fetchCategories }
+    mapStateToProps,
+    { fetchCategories }
 )(CategoriesPanel);
