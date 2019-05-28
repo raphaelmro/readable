@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadPosts, sortByDate } from "../actions/posts";
+import { loadPosts, sortByDate, sortByScore } from "../actions/posts";
 import PostItem from "./PostItem";
 import LoadingBar from "react-redux-loading-bar";
 
@@ -15,6 +15,10 @@ class PostsPanel extends Component {
 
   sortByDate = posts => {
     this.props.sortByDate(posts.posts);
+  };
+
+  sortByScore = posts => {
+    this.props.sortByScore(posts.posts);
   };
 
   renderList() {
@@ -35,6 +39,7 @@ class PostsPanel extends Component {
       this.setState({
         selectedValue: "score"
       });
+      this.sortByScore(this.props.posts);
     } else {
       this.setState({
         selectedValue: "selected"
@@ -76,6 +81,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   sortByDate: posts => dispatch(sortByDate(posts)),
+  sortByScore: posts => dispatch(sortByScore(posts)),
   loadPosts: () => dispatch(loadPosts())
 });
 

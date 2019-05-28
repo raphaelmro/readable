@@ -6,7 +6,8 @@ export const types = {
   LOAD_POSTS_SUCCESS: "LOAD_POSTS_SUCCESS",
   LOAD_POSTS_FAILURE: "LOAD_POSTS_FAILURE",
   LOAD_POSTS_VOTE: "LOAD_POSTS_VOTE",
-  SORT_BY_DATE: "SORT_BY_DATE"
+  SORT_BY_DATE: "SORT_BY_DATE",
+  SORT_BY_SCORE: "SORT_BY_SCORE"
 };
 
 export const loadPosts = () => async dispatch => {
@@ -44,5 +45,11 @@ export const loadVotePost = (id, vote) => async dispatch => {
 export const sortByDate = posts => async dispatch => {
   dispatch(showLoading());
   dispatch({ type: types.SORT_BY_DATE, payload: posts });
+  dispatch(hideLoading());
+};
+
+export const sortByScore = posts => async dispatch => {
+  dispatch(showLoading());
+  dispatch({ type: types.SORT_BY_SCORE, payload: posts });
   dispatch(hideLoading());
 };

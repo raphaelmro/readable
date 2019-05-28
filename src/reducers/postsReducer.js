@@ -22,13 +22,24 @@ export default (state = INITIAL_DATA_STATE, action) => {
     case types.SORT_BY_DATE:
       const postsSortByDate = _.sortBy(action.payload, [
         function(post) {
-          return post.voteScore;
+          return post.timestamp;
         }
       ]).reverse();
       return {
         ...state,
         posts: postsSortByDate
       };
+    case types.SORT_BY_SCORE:
+      const postsSortByScore = _.sortBy(action.payload, [
+        function(post) {
+          return post.voteScore;
+        }
+      ]).reverse();
+      return {
+        ...state,
+        posts: postsSortByScore
+      };
+
     default:
       return state;
   }
