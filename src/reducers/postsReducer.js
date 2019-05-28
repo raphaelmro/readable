@@ -1,9 +1,10 @@
-import { types } from '../actions/posts'
+import { types } from "../actions/posts";
+import _ from "lodash";
 
 const INITIAL_DATA_STATE = {
   posts: {},
   fetching: false,
-  error: ''
+  error: ""
 };
 
 export default (state = INITIAL_DATA_STATE, action) => {
@@ -16,6 +17,16 @@ export default (state = INITIAL_DATA_STATE, action) => {
     case types.LOAD_POSTS_SUCCESS:
       return {
         ...state,
+        posts: action.payload
+      };
+    case types.SORT_BY_DATE:
+      const postsSortByDate = _.sortBy(action.payload, [
+        function(post) {
+          return post.voteScore;
+        }
+      ]).reverse();
+      return {
+        ...postsSortByDate,
         posts: action.payload
       };
     default:
