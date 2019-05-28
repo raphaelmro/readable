@@ -26,8 +26,8 @@ export default (state = INITIAL_DATA_STATE, action) => {
         }
       ]).reverse();
       return {
-        ...postsSortByDate,
-        posts: action.payload
+        ...state,
+        posts: postsSortByDate
       };
     default:
       return state;
