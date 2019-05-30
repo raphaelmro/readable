@@ -14,7 +14,8 @@ class CategoriesPanel extends Component {
         <CategoriesItem
             key={`${category.name}-${index}`}
             name={category.name}
-            path={category.path} />
+            path={category.path}
+        />
     )
   }
 

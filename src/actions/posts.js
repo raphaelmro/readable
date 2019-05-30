@@ -30,7 +30,7 @@ export const loadPosts = () => async dispatch => {
 export const loadVotePost = (id, vote) => async dispatch => {
   dispatch({ type: types.LOAD_POSTS_REQUEST, payload: true });
   try {
-    const response = await api.post(`/posts/${id}`, { option: vote });
+    /*const response = await api.post(`/posts/${id}`, { option: vote });*/
     dispatch({ type: types.LOAD_POSTS_VOTE });
     dispatch(loadPosts());
   } catch (error) {
