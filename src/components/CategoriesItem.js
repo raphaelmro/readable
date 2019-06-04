@@ -1,17 +1,23 @@
-import React, { Fragment } from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-const CategoriesItem = (props) => {
-    const { name,/*path*/ } = props;
-  return (
-    <Fragment>
-      <a className="panel-block" href="https://github.com">
-        <span className="panel-icon">
-          <i className="fas fa-hashtag" aria-hidden="true" />
-        </span>
+class CategoriesItem extends Component {
+
+  handleCategoryList = () => {
+    alert('Clicked!')
+  }
+
+  render() {
+    const { name, path } = this.props;
+    return (
+      <Link to={`/${path}`} className="panel-block" onClick={this.handleCategoryList}>
+      <span className="panel-icon">
+        <i className="fas fa-hashtag" aria-hidden="true" />
+      </span>
         {name}
-      </a>
-    </Fragment>
-  );
+      </Link>
+    );
+  }
 };
 
 export default CategoriesItem;

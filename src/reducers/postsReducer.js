@@ -1,46 +1,26 @@
-import { types } from "../actions/posts";
-import _ from "lodash";
+import { LOAD_POSTS } from "../actions/posts";
+import { LOAD_NEW_POST, DELETE_POST } from "../actions/post";
+import { VOTE } from "../actions/vote";
 
-const INITIAL_DATA_STATE = {
-  posts: {},
-  fetching: false,
-  error: ""
-};
-
-export default (state = INITIAL_DATA_STATE, action) => {
+const postsReducer = (state = [], action) => {
+  const { posts, post, id, score } = action;
   switch (action.type) {
-    case types.LOAD_POSTS_REQUEST:
-      return {
-        ...state,
-        fetching: action.payload
-      };
-    case types.LOAD_POSTS_SUCCESS:
-      return {
-        ...state,
-        posts: action.payload
-      };
-    case types.SORT_BY_DATE:
-      const postsSortByDate = _.sortBy(action.payload, [
-        function(post) {
-          return post.timestamp;
+    case LOAD_POSTS:
+      return posts;
+    case LOAD_NEW_POST:
+      return [...state, post];
+    case DELETE_POST:
+      return state.filter(p => p.id !== post.id);
+    case VOTE:
+      return state.map(p => {
+        if (p.id === id) {
+          p.voteScore = score;
         }
-      ]).reverse();
-      return {
-        ...state,
-        posts: postsSortByDate
-      };
-    case types.SORT_BY_SCORE:
-      const postsSortByScore = _.sortBy(action.payload, [
-        function(post) {
-          return post.voteScore;
-        }
-      ]).reverse();
-      return {
-        ...state,
-        posts: postsSortByScore
-      };
-
+        return p;
+      });
     default:
       return state;
   }
 };
+
+export default postsReducer;

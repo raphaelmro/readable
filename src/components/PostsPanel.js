@@ -1,91 +1,60 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadPosts, sortByDate, sortByScore } from "../actions/posts";
+import { fetchPosts } from "../actions/posts";
+import { sortPosts } from "../actions/sortPosts";
 import PostItem from "./PostItem";
 import LoadingBar from "react-redux-loading-bar";
 
 class PostsPanel extends Component {
-  state = {
-    selectedValue: "selected"
-  };
-
-  componentDidMount() {
-    this.props.loadPosts();
-  }
-
-  sortByDate = posts => {
-    this.props.sortByDate(posts.posts);
-  };
-
-  sortByScore = posts => {
-    this.props.sortByScore(posts.posts);
-  };
-
-  renderList() {
-    const { posts } = this.props.posts;
-    return (
-      posts.length > 0 &&
-      posts.map(post => <PostItem key={post.id} post={post} />)
-    );
-  }
-
-  handleChange = event => {
-    if (event.target.value === "date") {
-      this.setState({
-        selectedValue: "date"
-      });
-      this.sortByDate(this.props.posts);
-    } else if (event.target.value === "score") {
-      this.setState({
-        selectedValue: "score"
-      });
-      this.sortByScore(this.props.posts);
-    } else {
-      this.setState({
-        selectedValue: "selected"
-      });
-    }
+  componentDidMount = () => {
+    this.props.fetchPosts();
   };
 
   render() {
-    const { fetching, error } = this.props.posts;
+    const postsNotDeleted = this.props.posts.filter(
+      post => post.deleted === false
+    );
+    const { category } = this.props.match.params;
+    // show posts by category
+    const showingPosts = !category
+      ? postsNotDeleted
+      : postsNotDeleted.filter(post => post.category === category);
+    // sort posts by date or score
+    const { orderBy, sortBy } = this.props.sort;
+    const { sortPosts } = this.props;
+    const sortedPosts = orderBy
+      ? showingPosts.sort((a, b) => a[sortBy] - b[sortBy])
+      : showingPosts.sort((a, b) => b[sortBy] - a[sortBy]);
+
     return (
       <div>
         <LoadingBar />
         <div className="container is-fluid">
-          <span className="sort-title">Sort </span>
-          <div className="select is-small">
-            <select
-              onChange={this.handleChange}
-              value={this.state.selectedValue}
-            >
-              <option>- Select an option -</option>
-              <option value="date">by Date</option>
-              <option value="score">by Score</option>
-            </select>
+          <div className="field is-grouped">
+            <p className="control">
+              <a className="button is-light" onClick={() => sortPosts(!orderBy, "timestamp")}>
+                By Date
+              </a>
+            </p>
+            <p className="control">
+              <a className="button is-light" onClick={() => sortPosts(!orderBy, "voteScore")}>
+                By Score
+              </a>
+            </p>
           </div>
-          {fetching && <h1>Loading...</h1>}
-
-          {!fetching && !!error && <h1>{error}</h1>}
-
-          {!fetching && this.renderList()}
+          {sortedPosts.length === 0 ? (
+            <h3>No posts available</h3>
+          ) : (
+            sortedPosts.map(post => <PostItem post={post} key={post.id} />)
+          )}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  posts: state.posts
-});
-
-const mapDispatchToProps = dispatch => ({
-  sortByDate: posts => dispatch(sortByDate(posts)),
-  sortByScore: posts => dispatch(sortByScore(posts)),
-  loadPosts: () => dispatch(loadPosts())
-});
-
+const mapStateToProps = ({ posts, sort }) => ({ posts, sort });
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { fetchPosts, sortPosts }
 )(PostsPanel);

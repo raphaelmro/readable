@@ -2,39 +2,42 @@ import React, { Component } from "react";
 import CategoriesItem from "./CategoriesItem";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions/categories";
+import { Link } from "react-router-dom";
 
 class CategoriesPanel extends Component {
   componentDidMount() {
     this.props.fetchCategories();
   }
 
-  renderList() {
-    const { categories } = this.props.categories;
-    return categories && categories.map((category, index) =>
-        <CategoriesItem
-            key={`${category.name}-${index}`}
-            name={category.name}
-            path={category.path} />
-    )
-  }
-
   render() {
+    const { categories } = this.props;
     return (
-        <div className="container is-fluid">
-          <nav className="panel">
-            <p className="panel-heading">Categories</p>
-            {this.renderList()}
-          </nav>
-        </div>
+      <div className="container is-fluid">
+        <nav className="panel">
+          <p className="panel-heading">Categories</p>
+          <p className="panel-tabs">
+            <Link to="/"> All categories </Link>
+          </p>
+          {categories.map((category, index) => (
+            <Link
+              to={`/${category.name}`}
+              key={`${category.name}-${index}`}
+              className="panel-block"
+            >
+              <span className="panel-icon">
+                <i className="fas fa-hashtag" aria-hidden="true" />
+              </span>
+              {category.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return { categories: state.categories };
-}
-
+const mapStateToProps = ({ categories }) => ({ categories });
 export default connect(
-    mapStateToProps,
-    { fetchCategories }
+  mapStateToProps,
+  { fetchCategories }
 )(CategoriesPanel);

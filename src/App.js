@@ -1,29 +1,28 @@
-import React, { Component, Fragment } from "react";
-import Header from "./components/Header";
-import PostsPanel from "./components/PostsPanel";
-import CategoriesPanel from "./components/CategoriesPanel";
+import React, { Component } from "react";
 import LoadingBar from "react-redux-loading-bar";
-
-const postsPanelStyle = {
-  padding: "30px"
-};
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import CategoriesPanel from "./components/CategoriesPanel";
+import PostsPanel from "./components/PostsPanel";
+import Header from "./components/Header";
 
 class App extends Component {
-
   render() {
     return (
-      <Fragment>
+      <BrowserRouter>
         <LoadingBar />
         <Header />
-        <div className="columns" style={postsPanelStyle}>
-          <div className="column is-three-quarters">
-            <PostsPanel />
+        <div className="columns">
+          <div className="column">
+            <Switch>
+              <Route exact path="/" component={PostsPanel} />
+              <Route exact path="/:category" component={PostsPanel} />
+            </Switch>
           </div>
           <div className="column">
             <CategoriesPanel />
           </div>
         </div>
-      </Fragment>
+      </BrowserRouter>
     );
   }
 }

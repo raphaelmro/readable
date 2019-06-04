@@ -1,10 +1,13 @@
-const INITIAL_DATA_STATE = [];
+import { LOAD_CATEGORIES } from "../actions/categories";
 
-export default (state = INITIAL_DATA_STATE, action) => {
+const categoriesReducer = (state = [], action) => {
+  const { categories } = action;
   switch (action.type) {
-    case "FETCH_CATEGORIES":
-      return action.payload;
+    case LOAD_CATEGORIES:
+      return categories;
     default:
       return state;
   }
 };
+
+export default categoriesReducer;
