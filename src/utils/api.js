@@ -113,7 +113,6 @@ export const deleteComment = (commentId) =>
 
 
 export const vote = ( id, option, type ) => {
-  console.log('vote function api')
   const postData = { id, option }
   return fetch(`${url}/${type}/${id}`, {
     method: 'POST',

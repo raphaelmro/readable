@@ -1,12 +1,13 @@
 import { VOTE } from "../actions/vote";
 
-const voteReducer = (state = {}, action) => {
-  const { id, score } = action;
-  if (action.type === VOTE) {
-    return { [id]: score };
-  } else {
-    return state;
+const vote = (state = {}, action) => {
+  const { id, score } = action
+  switch (action.type) {
+    case VOTE:
+      return{[id]: score}
+    default:
+      return state;
   }
 };
 
-export default voteReducer;
+export default vote;

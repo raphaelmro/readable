@@ -28,9 +28,9 @@ const downIconStyle = {
 class PostOptions extends Component {
   handleVote = (vote, id) => {
     if (vote === 'up') {
-      postVote(id, 'upVote', 'posts')
+      this.props.postVote(id, 'upVote', 'posts')
     } else if (vote === 'down') {
-      postVote(id, 'downVote', 'posts')
+      this.props.postVote(id, 'downVote', 'posts')
     }
   }
   render() {
