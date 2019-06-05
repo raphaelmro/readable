@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import moment from "moment";
 import PostOptions from "./PostOptions";
 import { connect } from "react-redux";
@@ -24,7 +24,7 @@ class PostDetails extends Component {
       comment => comment.deleted === false
     );
     return (
-      <Fragment>
+      <div className="container is-fluid">
         <div className="box">
           <div className="columns">
             <PostOptions
@@ -79,7 +79,7 @@ class PostDetails extends Component {
         </div>
         <CommentsList parentId={id} comments={commentsNotDeleted} />
         <CommentsForm parentId={id} />
-      </Fragment>
+      </div>
     );
   }
 }

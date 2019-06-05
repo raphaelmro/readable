@@ -67,7 +67,7 @@ class PostForm extends Component {
     const header = postId ? "Edit Post" : "New Post";
     const button = postId ? "Save" : "Submit";
     return (
-      <div className="new-post">
+      <div className="container is-fluid">
         <h2>{header}</h2>
         <form
           onSubmit={e => {
@@ -85,7 +85,7 @@ class PostForm extends Component {
               value={author}
               onChange={this.updateState}
               type="text"
-              placeholder="Enter your name"
+              placeholder="Author"
               required
             />
           </div>
@@ -97,7 +97,7 @@ class PostForm extends Component {
               value={title}
               onChange={this.updateState}
               type="text"
-              placeholder="Enter here"
+              placeholder="Title"
               required
             />
           </div>
@@ -109,7 +109,7 @@ class PostForm extends Component {
               value={body}
               onChange={this.updateState}
               type="text"
-              placeholder="Enter here"
+              placeholder="What are you thinking?"
               required
             />
           </div>

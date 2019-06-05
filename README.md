@@ -7,9 +7,6 @@
 
 As well you can read posts for each category
 
-## Demo
-https://raphaelmro.github.io/myreads-react/
-
 ## Requirements
 -   NodeJS
 -   React
