@@ -32,14 +32,20 @@ class PostsPanel extends Component {
         <div className="container is-fluid">
           <div className="field is-grouped">
             <p className="control">
-              <a className="button is-light" onClick={() => sortPosts(!orderBy, "timestamp")}>
+              <button
+                className="button is-light"
+                onClick={() => sortPosts(!orderBy, "timestamp")}
+              >
                 By Date
-              </a>
+              </button>
             </p>
             <p className="control">
-              <a className="button is-light" onClick={() => sortPosts(!orderBy, "voteScore")}>
+              <button
+                className="button is-light"
+                onClick={() => sortPosts(!orderBy, "voteScore")}
+              >
                 By Score
-              </a>
+              </button>
             </p>
           </div>
           {sortedPosts.length === 0 ? (

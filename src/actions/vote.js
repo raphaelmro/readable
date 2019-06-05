@@ -13,9 +13,7 @@ export const postVote = (id, option, type) => dispatch => {
   return api
     .vote(id, option, type)
     .then(payload =>
-      dispatch({ type: VOTE,
-                  id: payload.id,
-                  score: payload.voteScore })
+      dispatch({ type: VOTE, id: payload.id, score: payload.voteScore })
     )
     .catch(error => dispatch({ type: VOTE_ERROR, error }));
 };

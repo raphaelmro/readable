@@ -1,9 +1,9 @@
 import React from "react";
 
 const containerHeaderStyle = {
-  'float': 'left',
-  'paddingLeft': '4%'
-}
+  float: "left",
+  paddingLeft: "4%"
+};
 
 const Header = () => {
   return (

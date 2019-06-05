@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CategoriesItem from "./CategoriesItem";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions/categories";
 import { Link } from "react-router-dom";
@@ -31,6 +30,9 @@ class CategoriesPanel extends Component {
             </Link>
           ))}
         </nav>
+        <Link className="button" to="/new">
+          New Post
+        </Link>
       </div>
     );
   }
