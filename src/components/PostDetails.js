@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import moment from "moment";
+import _ from "lodash";
 import PostOptions from "./PostOptions";
 import { connect } from "react-redux";
 import CommentsList from "./CommentsList";
@@ -9,6 +10,7 @@ import { fetchPost } from "../actions/post";
 import { fetchPosts } from "../actions/posts";
 import { removePost } from "../actions/post";
 import { Link } from "react-router-dom";
+import NotFound404 from "./NotFound404";
 
 class PostDetails extends Component {
   componentDidMount = () => {
@@ -20,66 +22,74 @@ class PostDetails extends Component {
   render() {
     const { post, comments, history } = this.props;
     const { id, author, title, body, timestamp, commentCount } = post;
+    const qtyComments = comments.length
     const commentsNotDeleted = comments.filter(
       comment => comment.deleted === false
     );
+
     return (
-      <div className="container is-fluid">
-        <div className="box">
-          <div className="columns">
-            <PostOptions
-              post={post}
-              commentCount={commentCount}
-              history={history}
-            />
-            <div className="column">
-              <article className="media">
-                <div className="media-content">
-                  <div className="content">
-                    <p>
-                      <strong>{title}</strong>
-                      <br />
-                      <small>@{author}</small>
-                      <br />
-                      {body}
-                    </p>
-                  </div>
-                  <nav className="level is-mobile">
-                    <div className="level-left">
-                      <div className="level-item">
-                        <span className="icon has-text-info">
-                          <i className="fas fa-reply" aria-hidden="true" />
-                          <small>
-                            {commentCount !== 0 ? commentCount : ""}
-                          </small>
-                        </span>
+      <Fragment>
+        {!_.isEmpty(this.props.post) ? (
+          <div className="container is-fluid">
+            <div className="box">
+              <div className="columns">
+                <PostOptions
+                  post={post}
+                  commentCount={commentCount}
+                  history={history}
+                />
+                <div className="column">
+                  <article className="media">
+                    <div className="media-content">
+                      <div className="content">
+                        <p>
+                          <strong>{title}</strong>
+                          <br />
+                          <small>@{author}</small>
+                          <br />
+                          {body}
+                        </p>
                       </div>
-                      <div className="level-item">
-                        <small>{moment(timestamp).format("lll")}</small>
-                      </div>
+                      <nav className="level is-mobile">
+                        <div className="level-left">
+                          <div className="level-item">
+                            <span className="icon has-text-info">
+                              <i className="fas fa-reply" aria-hidden="true" />
+                              <small>
+                                {qtyComments !== 0 ? qtyComments : ""}
+                              </small>
+                            </span>
+                          </div>
+                          <div className="level-item">
+                            <small>{moment(timestamp).format("lll")}</small>
+                          </div>
+                        </div>
+                        <div className="level-right">
+                          <Link to={`/edit/${id}`}>
+                            <i className="far fa-edit" />
+                          </Link>
+                          <span
+                            onClick={() => {
+                              this.props.removePost(post);
+                              history && history.push("/");
+                            }}
+                          >
+                            <i className="far fa-trash-alt" />
+                          </span>
+                        </div>
+                      </nav>
                     </div>
-                    <div className="level-right">
-                      <Link to={`/edit/${id}`}>
-                        <i className="far fa-edit" />
-                      </Link>
-                      <span
-                        onClick={() => {
-                          this.props.removePost(post);
-                          history && history.push("/");
-                        }}
-                      >
-                        <i className="far fa-trash-alt" />
-                      </span>
-                    </div>
-                  </nav>
+                  </article>
                 </div>
-              </article>
+              </div>
             </div>
+            <CommentsList parentId={id} comments={commentsNotDeleted} />
+            <CommentsForm parentId={id} />
           </div>
-        </div>
-        <CommentsList parentId={id} comments={commentsNotDeleted} />
-        <CommentsForm parentId={id} />
-      </div>
+        ) : (
+          <NotFound404 />
+        )}
+      </Fragment>
     );
   }
 }

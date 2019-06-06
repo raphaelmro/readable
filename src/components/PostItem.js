@@ -8,10 +8,7 @@ import { connect } from "react-redux";
 class PostItem extends Component {
   render() {
     const { id } = this.props.post;
-    const {
-      history,
-      post
-    } = this.props;
+    const { history, post } = this.props;
 
     return (
       <div className="box">
