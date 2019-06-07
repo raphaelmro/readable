@@ -34,8 +34,11 @@ class PostOptions extends Component {
     }
   };
   render() {
-    const { post } = this.props;
-    const { id } = this.props.post;
+    const { vote } = this.props;
+    const { id, voteScore } = this.props.post;
+
+    const score = vote[id] ? vote[id] : voteScore
+
     return (
       <div className="column is-1 vote-box">
         <div className="columns is-desktop is-vcentered" style={postItemStyle}>
@@ -50,9 +53,9 @@ class PostOptions extends Component {
           </div>
           <div
             className="column"
-            style={{ color: post.voteScore > 0 ? "green" : "red" }}
+            style={{ color: score >= 0 ? "green" : "red" }}
           >
-            {post.voteScore}
+            {score}
           </div>
           <div className="column" style={downIconStyle}>
             <span onClick={() => this.handleVote("down", id)}>

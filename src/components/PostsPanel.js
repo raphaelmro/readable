@@ -8,6 +8,7 @@ import LoadingBar from "react-redux-loading-bar";
 class PostsPanel extends Component {
   componentDidMount = () => {
     this.props.fetchPosts();
+
   };
 
   render() {

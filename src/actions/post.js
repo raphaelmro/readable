@@ -4,6 +4,8 @@ export const LOAD_POST = "LOAD_POST";
 export const LOAD_NEW_POST = "LOAD_NEW_POST";
 export const DELETE_POST = "DELETE_POST";
 
+
+
 export const loadPost = post => ({
   type: LOAD_POST,
   post
