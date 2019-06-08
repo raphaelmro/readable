@@ -26,36 +26,27 @@ const downIconStyle = {
 };
 
 class PostOptions extends Component {
-  handleVote = (vote, id) => {
-    if (vote === "up") {
-      this.props.postVote(id, "upVote", "posts");
-    } else if (vote === "down") {
-      this.props.postVote(id, "downVote", "posts");
-    }
-  };
   render() {
-    const { post } = this.props;
-    const { id } = this.props.post;
+    const { id, voteScore } = this.props.post;
+    const { vote } = this.props;
+
+    const score = vote[id] ? vote[id] : voteScore;
     return (
       <div className="column is-1 vote-box">
         <div className="columns is-desktop is-vcentered" style={postItemStyle}>
-          <div
-            className="column"
-            style={upIconStyle}
-            onClick={() => this.handleVote("up", id)}
-          >
-            <span>
+          <div className="column" style={upIconStyle}>
+            <span onClick={() => this.props.postVote(id, "upVote", "posts")}>
               <i className="far fa-thumbs-up" />
             </span>
           </div>
           <div
             className="column"
-            style={{ color: post.voteScore > 0 ? "green" : "red" }}
+            style={{ color: score >= 0 ? "green" : "red" }}
           >
-            {post.voteScore}
+            {score}
           </div>
           <div className="column" style={downIconStyle}>
-            <span onClick={() => this.handleVote("down", id)}>
+            <span onClick={() => this.props.postVote(id, "downVote", "posts")}>
               <i className="far fa-thumbs-down" />
             </span>
           </div>

@@ -3,17 +3,13 @@ import * as api from "../utils/api";
 export const VOTE = "VOTE";
 export const VOTE_ERROR = "VOTE_ERROR";
 
-export const vote = payload => ({
+export const vote = (id, score) => ({
   type: VOTE,
-  id: payload.id,
-  score: payload.voteScore
+  id,
+  score
 });
 
-export const postVote = (id, option, type) => dispatch => {
-  return api
+export const postVote = (id, option, type) => dispatch =>
+  api
     .vote(id, option, type)
-    .then(payload =>
-      dispatch({ type: VOTE, id: payload.id, score: payload.voteScore })
-    )
-    .catch(error => dispatch({ type: VOTE_ERROR, error }));
-};
+    .then(item => dispatch(vote(item.id, item.voteScore)));
